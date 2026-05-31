@@ -1,0 +1,296 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAMOCA LP ワイヤーフレーム（スマホ / 白黒）</title>
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --line:#9a9a9a;
+    --line-soft:#c8c8c8;
+    --fill:#e8e8e8;
+    --fill-2:#d6d6d6;
+    --muted:#6b6b6b;
+    --paper:#ffffff;
+    --canvas:#8c8c8c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family: -apple-system, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
+    background:
+      repeating-linear-gradient(45deg, #888 0 1px, transparent 1px 14px),
+      var(--canvas);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    padding:28px 12px 60px;
+  }
+  .stage{ max-width:430px; margin:0 auto; }
+  .caption{
+    color:#f2f2f2; text-align:center; font-size:13px; letter-spacing:.04em;
+    margin:0 0 18px; line-height:1.7;
+  }
+  .caption b{font-weight:700}
+
+  /* phone frame */
+  .phone{
+    width:390px; max-width:100%; margin:0 auto;
+    background:var(--paper);
+    border:2px solid #2b2b2b;
+    border-radius:30px;
+    overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.35);
+  }
+  .notch{height:26px; background:var(--paper); position:relative}
+  .notch::after{content:""; position:absolute; top:9px; left:50%; transform:translateX(-50%);
+    width:120px; height:8px; background:#cfcfcf; border-radius:8px;}
+
+  /* section */
+  section{
+    position:relative;
+    padding:26px 20px;
+    border-bottom:1px dashed var(--line-soft);
+  }
+  .tag{
+    position:absolute; top:8px; right:8px;
+    font-size:10px; letter-spacing:.05em;
+    color:var(--muted);
+    border:1px solid var(--line-soft);
+    border-radius:4px; padding:2px 6px;
+    background:#fafafa;
+  }
+
+  /* wireframe primitives */
+  .h1{font-size:26px; line-height:1.35; font-weight:800; letter-spacing:-.01em; margin:0 0 12px;}
+  .h2{font-size:20px; line-height:1.4; font-weight:800; margin:0 0 10px;}
+  .lead{font-size:13px; line-height:1.85; color:#333; margin:0 0 14px;}
+  .body{font-size:12.5px; line-height:1.95; color:#444; margin:0 0 12px;}
+  .small{font-size:11px; line-height:1.7; color:var(--muted); margin:8px 0 0;}
+  .strong{font-weight:800; color:var(--ink);}
+  .eyebrow{font-size:11px; letter-spacing:.12em; color:var(--muted); margin:0 0 10px; font-weight:700;}
+
+  .img{
+    background:
+      repeating-linear-gradient(45deg, var(--line-soft) 0 1px, transparent 1px 11px),
+      var(--fill);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted); font-size:11px; letter-spacing:.1em;
+    border-radius:6px;
+  }
+  .img.tall{height:170px}
+  .img.med{height:120px}
+  .img.logo{height:54px; width:170px; margin:0 auto 16px}
+  .img.phone-shot{height:230px}
+
+  .btn{
+    display:flex; align-items:center; justify-content:center;
+    background:var(--ink); color:#fff;
+    font-weight:700; font-size:14px;
+    height:48px; border-radius:8px; margin:14px 0 6px;
+  }
+  .btn.ghost{background:#fff; color:var(--ink); border:1.5px solid var(--ink);}
+  .btn-sub{font-size:10.5px; color:var(--muted); text-align:center; margin:0;}
+
+  .badges{display:flex; gap:6px; flex-wrap:wrap; margin-top:14px;}
+  .badge{
+    font-size:10px; color:#333; border:1px solid var(--line-soft);
+    border-radius:20px; padding:5px 10px; background:#fafafa;
+  }
+
+  .worry{display:flex; gap:8px; align-items:flex-start; font-size:12.5px; line-height:1.7; margin:9px 0; color:#333}
+  .chk{flex:0 0 auto; width:16px; height:16px; border:1.5px solid var(--ink); border-radius:3px; margin-top:2px}
+
+  .pill{
+    display:inline-block; font-size:12px; border:1px solid var(--line);
+    border-radius:20px; padding:6px 12px; margin:4px 5px 4px 0; background:#f6f6f6; color:#333;
+  }
+
+  .flow{display:flex; flex-direction:column; align-items:center; gap:6px; margin:14px 0;}
+  .flow .step{
+    width:80%; text-align:center; font-size:13px; font-weight:700;
+    border:1.5px solid var(--ink); border-radius:8px; padding:10px; background:#fff;
+  }
+  .flow .step.last{background:var(--ink); color:#fff;}
+  .flow .arrow{font-size:14px; color:var(--muted)}
+
+  .feat{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:12px 0; border-top:1px solid #eee;
+  }
+  .feat:first-of-type{border-top:0}
+  .feat .ico{flex:0 0 auto; width:42px; height:42px; border:1px solid var(--line);
+    background:var(--fill); border-radius:8px; display:flex; align-items:center; justify-content:center;
+    font-size:9px; color:var(--muted)}
+  .feat .ft{font-size:13.5px; font-weight:800; margin:0 0 4px; line-height:1.4}
+  .feat .fb{font-size:11.5px; color:#555; line-height:1.7; margin:0}
+
+  .price-big{font-size:40px; font-weight:900; line-height:1; margin:6px 0 4px; text-align:center;}
+  .price-big small{font-size:16px; font-weight:800;}
+  .price-sub{text-align:center; font-size:12.5px; color:#444; margin:0 0 14px;}
+  .spec{font-size:11.5px; color:#555; line-height:1.9; margin:0; padding-left:18px;}
+
+  .center{text-align:center}
+  .brand{font-size:22px; font-weight:900; text-align:center; letter-spacing:.02em; margin:8px 0 4px;}
+
+  footer{padding:22px 20px; background:#f4f4f4; font-size:10.5px; color:var(--muted); line-height:1.9;}
+
+  /* floating CTA hint */
+  .sticky-note{
+    position:sticky; bottom:0;
+    background:rgba(26,26,26,.94); color:#fff;
+    text-align:center; font-size:11px; padding:10px;
+    letter-spacing:.03em;
+  }
+  .sticky-note b{font-weight:800}
+</style>
+
+<div class="stage">
+  <p class="caption"><b>MAMOCA LP ワイヤーフレーム</b><br>スマホ優先 / 白黒の骨組み — コピー量と流れの確認用</p>
+
+  <div class="phone">
+    <div class="notch"></div>
+
+    <!-- ① FV -->
+    <section>
+      <span class="tag">① ファーストビュー</span>
+      <div class="img logo">LOGO</div>
+      <h1 class="h1">その判断、<br>1人でさせない。</h1>
+      <p class="lead">離れて暮らす親の「詐欺・とっさの判断・もしもの孤立」を、家族みんなで“その瞬間に”止める。家族版110番、MAMOCA。</p>
+      <div class="img tall">メインビジュアル（家族＋SOSボタン）</div>
+      <div class="btn">まずは1ヶ月無料で試す</div>
+      <p class="btn-sub">たったの1日46円・親はLINEだけでOK</p>
+      <div class="badges">
+        <span class="badge">🛡 元警察防犯担当 監修</span>
+        <span class="badge">📱 親はアプリ不要</span>
+        <span class="badge">🎁 初月無料</span>
+      </div>
+    </section>
+
+    <!-- ② 共感 -->
+    <section>
+      <span class="tag">② 問題提起（共感）</span>
+      <h2 class="h2">こんな不安、<br>ありませんか？</h2>
+      <div class="worry"><span class="chk"></span><span>実家の親が、あやしい電話や訪問販売に出ていないか心配</span></div>
+      <div class="worry"><span class="chk"></span><span>離れて暮らしていて、もしもの時にすぐ気づけるか不安</span></div>
+      <div class="worry"><span class="chk"></span><span>「投資の話に乗っていないか」「変な契約をしていないか」気がかり</span></div>
+      <div class="worry"><span class="chk"></span><span>毎日電話して確認するのも現実的じゃない</span></div>
+      <p class="body" style="margin-top:14px">心配しているのに、できることが「祈ること」しかない。そんなもどかしさを、仕組みに変えるのがMAMOCAです。</p>
+    </section>
+
+    <!-- ③ 本質 -->
+    <section>
+      <span class="tag">③ 問題の本質</span>
+      <h2 class="h2">人は、1人で抱えた<br>時に危険になる。</h2>
+      <p class="body">年齢に関係なく、人は1人で判断を迫られた時に冷静さを失います。孤立は、正しい判断力を奪う最大の要因です。</p>
+      <div>
+        <span class="pill">詐欺</span><span class="pill">訪問販売</span><span class="pill">誘拐・行方不明</span>
+        <span class="pill">ストーカー</span><span class="pill">不審者</span><span class="pill">孤独死</span>
+      </div>
+      <p class="body" style="margin-top:16px"><span class="strong">これらの共通点は、たった1つ。<br>「相談する前に、その場で決めてしまったこと」。</span></p>
+      <p class="body">逆に言えば──相談する“ひと呼吸”があれば、防げた被害がほとんどなのです。</p>
+    </section>
+
+    <!-- ④ 橋渡し -->
+    <section>
+      <span class="tag">④ 解決策の提示</span>
+      <div class="img logo">LOGO</div>
+      <h2 class="h2 center">だから、MAMOCA。</h2>
+      <p class="body center">「孤立」と「即決」を断ち切るために生まれた、家族版110番。迷った瞬間に、家族全員へ一斉に“つなぐ”。1人で決めさせない。それだけで、未来は変わります。</p>
+    </section>
+
+    <!-- ⑤ ストーリー -->
+    <section>
+      <span class="tag">⑤ 開発ストーリー</span>
+      <p class="eyebrow">MAMOCAが生まれた理由</p>
+      <h2 class="h2">私は、詐欺被害者。<br>親友は、元・警察の防犯担当。</h2>
+      <p class="body">きっかけは、私自身が詐欺に遭ったことでした。あとから振り返れば、おかしな点はいくつもあった。でもあの時、私は1人で、その場で決めてしまった。</p>
+      <p class="body">その話を、元・警察で防犯を担当していた親友にしたとき、返ってきた言葉が忘れられません。「捜査で見てきた被害も、結局おなじだ。みんな“相談する前”に決めている」と。</p>
+      <p class="body">被害者と、捜査側。立場はまったく違うのに、たどり着いた結論は同じでした。<span class="strong">「人は、1人で決めると失敗することがある」。</span></p>
+      <p class="small">※エピソードは事実に合わせて加筆する欄</p>
+    </section>
+
+    <!-- ⑥ ちょっと待てボタン -->
+    <section>
+      <span class="tag">⑥ 看板機能</span>
+      <h2 class="h2">迷ったら、押すだけ。<br>「ちょっと待て」ボタン。</h2>
+      <p class="body">家族のグループLINEは、もうある。でも、“その瞬間に押せるボタン”は、ない。</p>
+      <div class="flow">
+        <div class="step">迷ったら押す</div>
+        <div class="arrow">↓</div>
+        <div class="step">家族全員に通知</div>
+        <div class="arrow">↓</div>
+        <div class="step">家族で判断</div>
+        <div class="arrow">↓</div>
+        <div class="step last">1人で決めない。</div>
+      </div>
+      <div class="img phone-shot">スマホ画面（SOSボタン）</div>
+      <p class="body" style="margin-top:12px">ボタンを押すと「家族に通知しました」と音声が流れます。その一言が、あなたを“その場の即決”から引き戻します。</p>
+    </section>
+
+    <!-- ⑦ 6機能 -->
+    <section>
+      <span class="tag">⑦ 6つの仕組み</span>
+      <h2 class="h2">家族で守るための、<br>6つの仕組み。</h2>
+      <div class="feat"><div class="ico">ICON</div><div><p class="ft">その場で孤立させない</p><p class="fb">ワンタップで登録家族全員に通知。「家族に通知しました」と音声。</p></div></div>
+      <div class="feat"><div class="ico">ICON</div><div><p class="ft">さりげなく、毎日見守る</p><p class="fb">曜日・時間・回数を自由に設定。無理なく続く“確認の習慣”。</p></div></div>
+      <div class="feat"><div class="ico">ICON</div><div><p class="ft">プロから、家族で学ぶ</p><p class="fb">介護・相続・詐欺・実家問題を専門家から家族一緒に。</p></div></div>
+      <div class="feat"><div class="ico">ICON</div><div><p class="ft">知識も進化させる</p><p class="fb">元警察関係者監修。あやしい電話・訪問販売の対策を体系的に。</p></div></div>
+      <div class="feat"><div class="ico">ICON</div><div><p class="ft">最新の手口を先回りで知る</p><p class="fb">いま流行りの詐欺手口を定期配信。知識が家族を守る。</p></div></div>
+      <div class="feat"><div class="ico">ICON</div><div><p class="ft">見逃しても、大丈夫</p><p class="fb">専門家ライブはいつでも見直しOK。好きな時間に学び直せる。</p></div></div>
+    </section>
+
+    <!-- ⑧ 反論処理 -->
+    <section>
+      <span class="tag">⑧ 不安解消</span>
+      <h2 class="h2">「うちの親、本当に<br>押してくれる？」</h2>
+      <p class="body">正直に言います。最初は、押してくれないかもしれません。でも、それでいいんです。</p>
+      <p class="body center" style="font-size:16px"><span class="strong">100回押せなくてもいい。<br>1回でも押せれば、未来は変わる。</span></p>
+      <p class="body">“いざという時に頼れる場所がある”──その安心感こそが、家族の力です。</p>
+      <p class="small">※通知設定やLINEの上位表示は、ご家族側で設定してください。</p>
+    </section>
+
+    <!-- ⑨ つながる -->
+    <section>
+      <span class="tag">⑨ つながる</span>
+      <h2 class="h2 center">家族が、チームになる。</h2>
+      <div class="img med">イラスト（TEAM / LINE）</div>
+      <p class="body" style="margin-top:14px">親はLINEだけでOK。アプリのインストールは不要です。スマホが苦手な親世代でも、今日から使えます。離れて暮らしていても、家族みんなで見守れる。</p>
+      <p class="small">見守る側はアプリ、見守られる側はLINE。だから、続く。</p>
+    </section>
+
+    <!-- ⑩ 料金 -->
+    <section>
+      <span class="tag">⑩ 料金</span>
+      <p class="eyebrow center">家族で守る、毎日の安心をこの価格で</p>
+      <div class="price-big">たったの1日 <small>約</small>46<small>円</small></div>
+      <p class="price-sub">月額1,380円</p>
+      <ul class="spec">
+        <li>見守られる方 2名・見守る方 3名まで登録可能</li>
+        <li>親はLINEだけでOK（アプリ不要）</li>
+        <li>家族みんなで利用できます</li>
+      </ul>
+      <div class="btn" style="margin-top:16px">まずは1ヶ月無料で始める</div>
+      <p class="btn-sub">初月は無料。続けるか、ゆっくり決めてください。</p>
+      <p class="small center" style="margin-top:14px; color:#999">▼ この下に「お客様の声」「FAQ」を追加推奨</p>
+    </section>
+
+    <!-- ⑪ クロージング -->
+    <section>
+      <span class="tag">⑪ クロージング</span>
+      <h1 class="h1 center">その判断、<br>1人にしない。</h1>
+      <p class="body center">助けを求めるのは、弱さじゃない。家族に任せられることが、本当の強さです。</p>
+      <div class="img med">家族イラスト</div>
+      <p class="brand">家族で守る。MAMOCA。</p>
+      <div class="btn">今すぐ1ヶ月無料で始める</div>
+    </section>
+
+    <!-- ⑫ footer -->
+    <footer>
+      運営会社情報 ／ お問い合わせ ／ 利用規約 ／ プライバシーポリシー<br>
+      特定商取引法に基づく表記（無料期間・自動課金タイミング・解約方法）
+    </footer>
+
+    <div class="sticky-note">追従CTA案：<b>1ヶ月無料で試す（1日46円）</b></div>
+  </div>
+
+  <p class="caption" style="margin-top:18px">グレーの斜線ボックス＝画像/イラスト配置箇所 ／ 右上ラベル＝ブロック番号</p>
+</div>
