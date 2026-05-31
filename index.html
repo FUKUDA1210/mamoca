@@ -23,6 +23,9 @@
     -webkit-font-smoothing:antialiased;
     padding:28px 12px 60px;
   }
+  @media (max-width:430px){
+    body{ padding-left:0; padding-right:0; padding-top:0; }
+  }
   .stage{ max-width:430px; margin:0 auto; }
   .caption{
     color:#f2f2f2; text-align:center; font-size:13px; letter-spacing:.04em;
@@ -30,18 +33,12 @@
   }
   .caption b{font-weight:700}
 
-  /* phone frame */
+  /* content column (phone chrome removed) */
   .phone{
     width:390px; max-width:100%; margin:0 auto;
     background:var(--paper);
-    border:2px solid #2b2b2b;
-    border-radius:30px;
     overflow:hidden;
-    box-shadow:0 18px 50px rgba(0,0,0,.35);
   }
-  .notch{height:26px; background:var(--paper); position:relative}
-  .notch::after{content:""; position:absolute; top:9px; left:50%; transform:translateX(-50%);
-    width:120px; height:8px; background:#cfcfcf; border-radius:8px;}
 
   /* section */
   section{
@@ -50,12 +47,7 @@
     border-bottom:1px dashed var(--line-soft);
   }
   .tag{
-    position:absolute; top:8px; right:8px;
-    font-size:10px; letter-spacing:.05em;
-    color:var(--muted);
-    border:1px solid var(--line-soft);
-    border-radius:4px; padding:2px 6px;
-    background:#fafafa;
+    display:none;
   }
 
   /* wireframe primitives */
@@ -144,10 +136,7 @@
 </style>
 
 <div class="stage">
-  <p class="caption"><b>MAMOCA LP ワイヤーフレーム</b><br>スマホ優先 / 白黒の骨組み — コピー量と流れの確認用</p>
-
   <div class="phone">
-    <div class="notch"></div>
 
     <!-- ① FV -->
     <section>
@@ -291,6 +280,4 @@
 
     <div class="sticky-note">追従CTA案：<b>1ヶ月無料で試す（1日46円）</b></div>
   </div>
-
-  <p class="caption" style="margin-top:18px">グレーの斜線ボックス＝画像/イラスト配置箇所 ／ 右上ラベル＝ブロック番号</p>
 </div>
